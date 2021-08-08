@@ -66,13 +66,14 @@ function drawSnake() {
     snake.x += snake.vx;
     snake.y += snake.vy;
 
-    borderBehavior();
+    setWallCollision();
 
     snake.tail.unshift({ x: snake.x, y: snake.y});
     
     if(snake.tail.length > snake.tailLength) {
         snake.tail.pop();
     }
+
     snake.tail.forEach((elem,index) => {
         if (index === 0) {
             context.fillStyle = '#000000';
@@ -84,7 +85,7 @@ function drawSnake() {
         if (elem.x === food.x && elem.y === food.y) {
             snake.tailLength++;
             incrScore();
-            randomFoodCoords();
+            setRandomFoodCoords();
         }
 
         for (let i = index + 1; i < snake.tail.length; i++) {
@@ -105,7 +106,7 @@ function drawWalls() {
 
 
 
-function borderBehavior() {
+function setWallCollision() {
     if(snake.x < blockSize) {
         snake.x = width - blockSize * 2;
     } else if(snake.x >= width - blockSize) {
@@ -123,7 +124,7 @@ function spawnFood() {
     context.fillRect(food.x, food.y, blockSize, blockSize);
 }
 
-function randomFoodCoords() {
+function setRandomFoodCoords() {
     food.x = randomizer (2, blockWidth - 1 ) * blockSize;
     food.y = randomizer (5, blockHeight - 1) * blockSize;
 }
@@ -156,7 +157,7 @@ function randomizer (min, max) {
 }
 
 function getRandomColor () {
-    const index = Math.floor(Math.random() * colors.length);
+    const index = randomizer(0, colors.length);
     return colors[index];
 }
 
