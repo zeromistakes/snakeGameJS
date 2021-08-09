@@ -51,34 +51,35 @@ class Game {
 
     control() {
         document.addEventListener('keydown', (event) => {
+            let moveUp;
+            let moveDown;
+            let moveLeft;
+            let moveRight;
+
             if (this.gamefield === '.gamefield') {
-                if (event.which === 37 && this.snake.vx === 0) { // left
-                    this.snake.vx = -this.blockSize;
-                    this.snake.vy = 0;
-                } else if (event.which === 38 && this.snake.vy === 0) { // up
-                    this.snake.vx = 0;
-                    this.snake.vy = -this.blockSize;
-                } else if (event.which === 39 && this.snake.vx === 0) { // right
-                    this.snake.vx = this.blockSize;
-                    this.snake.vy = 0;
-                } else if (event.which === 40 && this.snake.vy === 0) { // down
-                    this.snake.vx = 0;
-                    this.snake.vy = this.blockSize;
-                }
+                moveUp = 38;
+                moveDown = 40;
+                moveLeft = 37;
+                moveRight = 39;
             } else if (this.gamefield === '.anotherGamefield') {
-                if (event.which === 65 && this.snake.vx === 0) { // left
-                    this.snake.vx = -this.blockSize;
-                    this.snake.vy = 0;
-                } else if (event.which === 87 && this.snake.vy === 0) { // up
-                    this.snake.vx = 0;
-                    this.snake.vy = -this.blockSize;
-                } else if (event.which === 68 && this.snake.vx === 0) { // right
-                    this.snake.vx = this.blockSize;
-                    this.snake.vy = 0;
-                } else if (event.which === 83 && this.snake.vy === 0) { // down
-                    this.snake.vx = 0;
-                    this.snake.vy = this.blockSize;
-                }
+                moveUp = 87;
+                moveDown = 83;
+                moveLeft = 65;
+                moveRight = 68;
+            }
+
+            if (event.which === moveLeft && this.snake.vx === 0) { // left
+                this.snake.vx = -this.blockSize;
+                this.snake.vy = 0;
+            } else if (event.which === moveUp && this.snake.vy === 0) { // up
+                this.snake.vx = 0;
+                this.snake.vy = -this.blockSize;
+            } else if (event.which === moveRight && this.snake.vx === 0) { // right
+                this.snake.vx = this.blockSize;
+                this.snake.vy = 0;
+            } else if (event.which === moveDown && this.snake.vy === 0) { // down
+                this.snake.vx = 0;
+                this.snake.vy = this.blockSize;
             }
 
         });
