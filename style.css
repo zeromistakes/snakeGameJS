@@ -1,5 +1,10 @@
-.gamefield {
-    display:block;
-    margin: 100px auto;
+body {
+    display: flex;
+}
+
+.gamefield, .anotherGamefield{
+    display: block;
+    justify-content: center;
+    margin: 100px 50px;
     background-color: #c7ffcb;
 }
