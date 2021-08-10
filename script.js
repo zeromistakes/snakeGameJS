@@ -66,14 +66,16 @@ class Game {
             let stringKeyCode = String(event.which);
             let newDirection;
 
-            if(this.keymap.hasOwnProperty(stringKeyCode)) {
-               newDirection = this.keymap[stringKeyCode]; 
+            if(this.keymap.hasOwnProperty(stringKeyCode) ) {
+                newDirection = this.keymap[stringKeyCode]; 
+            } else {
+                return;
             }
             
             if (this.snake.vx != -newDirection.vx && this.snake.vy != -newDirection.vy ) {
                this.snake.vx = newDirection.vx * this.blockSize;
                this.snake.vy = newDirection.vy * this.blockSize; 
-            }
+            } 
 
         });
     }
