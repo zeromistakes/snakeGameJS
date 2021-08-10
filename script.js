@@ -64,13 +64,11 @@ class Game {
         document.addEventListener('keydown', (event) => {
 
             let stringKeyCode = String(event.which);
-            let newDirection;
-
+            let newDirection = this.keymap[this.moveRight];
+        
             if(this.keymap.hasOwnProperty(stringKeyCode) ) {
                 newDirection = this.keymap[stringKeyCode]; 
-            } else {
-                return;
-            }
+            } 
             
             if (this.snake.vx != -newDirection.vx && this.snake.vy != -newDirection.vy ) {
                this.snake.vx = newDirection.vx * this.blockSize;
