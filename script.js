@@ -1,5 +1,5 @@
 class Game {
-    constructor(gamefield) {
+    constructor(gamefield, moveUp, moveRight, moveDown, moveLeft) {
         this.canvas = document.querySelector(gamefield);
         this.context = this.canvas.getContext('2d');
         this.gamefield = gamefield;
@@ -15,6 +15,17 @@ class Game {
         this.frames = 0;
         this.speed = 6;
 
+        this.moveUp = moveUp;
+        this.moveDown = moveDown;
+        this.moveLeft = moveLeft;
+        this.moveRight = moveRight;
+
+        this.keymap = {
+            [moveUp] : {vx: 0, vy: -1}, 
+            [moveDown] : {vx: 0, vy: 1}, 
+            [moveLeft] : {vx: -1, vy: 0}, 
+            [moveRight] : {vx: 1, vy: 0}  
+        };
 
         this.snake = {
             x: this.width / 2,
@@ -45,41 +56,23 @@ class Game {
         this.drawScore();
         this.drawWalls();
         this.spawnFood();
-        this.drawSnake(this.snake);
+        this.drawSnake();
         
     } 
 
     control() {
         document.addEventListener('keydown', (event) => {
-            let moveUp;
-            let moveDown;
-            let moveLeft;
-            let moveRight;
 
-            if (this.gamefield === '.gamefield') {
-                moveUp = 38;
-                moveDown = 40;
-                moveLeft = 37;
-                moveRight = 39;
-            } else if (this.gamefield === '.anotherGamefield') {
-                moveUp = 87;
-                moveDown = 83;
-                moveLeft = 65;
-                moveRight = 68;
+            let stringKeyCode = String(event.which);
+            let newDirection;
+
+            if(this.keymap.hasOwnProperty(stringKeyCode)) {
+               newDirection = this.keymap[stringKeyCode]; 
             }
-
-            if (event.which === moveLeft && this.snake.vx === 0) { // left
-                this.snake.vx = -this.blockSize;
-                this.snake.vy = 0;
-            } else if (event.which === moveUp && this.snake.vy === 0) { // up
-                this.snake.vx = 0;
-                this.snake.vy = -this.blockSize;
-            } else if (event.which === moveRight && this.snake.vx === 0) { // right
-                this.snake.vx = this.blockSize;
-                this.snake.vy = 0;
-            } else if (event.which === moveDown && this.snake.vy === 0) { // down
-                this.snake.vx = 0;
-                this.snake.vy = this.blockSize;
+            
+            if (this.snake.vx != -newDirection.vx && this.snake.vy != -newDirection.vy ) {
+               this.snake.vx = newDirection.vx * this.blockSize;
+               this.snake.vy = newDirection.vy * this.blockSize; 
             }
 
         });
@@ -202,12 +195,12 @@ class Game {
     
 }
 
-let game = new Game('.gamefield');
+let game = new Game('.gamefield', '38', '39', '40', '37');
 game.gameLoop();
-console.log(game);
-let anotherGame = new Game('.anotherGamefield');
+
+let anotherGame = new Game('.anotherGamefield', '87', '68', '83', '65');
 anotherGame.gameLoop();
-console.log(anotherGame);
+
 
 
 
