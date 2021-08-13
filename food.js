@@ -13,7 +13,7 @@ export default class Food {
     }
 
     spawnFood(context) {
-        context.fillStyle = this.settings.color;
+        context.fillStyle = '#ff6600';
         context.fillRect(this.x, this.y, this.settings.blockSize, this.settings.blockSize);
     }
 

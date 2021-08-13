@@ -9,6 +9,7 @@ export default class Controls {
         
 
         this.keymap = {
+            "base" : {vx: 0, vy: 0},
             [moveUp] : {vx: 0, vy: -1}, 
             [moveDown] : {vx: 0, vy: 1}, 
             [moveLeft] : {vx: -1, vy: 0}, 
@@ -20,7 +21,7 @@ export default class Controls {
         document.addEventListener('keydown', (event) => {
 
             let stringKeyCode = String(event.which);
-            let newDirection = this.keymap[this.moveRight];
+            let newDirection = this.keymap["base"];
             
             if(this.keymap.hasOwnProperty(stringKeyCode) ) {
                 newDirection = this.keymap[stringKeyCode]; 
