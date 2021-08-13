@@ -65,7 +65,7 @@ class Game {
 
             let stringKeyCode = String(event.which);
             let newDirection = this.keymap[this.moveRight];
-        
+            
             if(this.keymap.hasOwnProperty(stringKeyCode) ) {
                 newDirection = this.keymap[stringKeyCode]; 
             } 
